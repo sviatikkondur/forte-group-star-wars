@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/forte-group-star-wars/static/css/main.460aae11.css",
+    "main.js": "/forte-group-star-wars/static/js/main.843da3ed.js",
+    "index.html": "/forte-group-star-wars/index.html",
+    "main.460aae11.css.map": "/forte-group-star-wars/static/css/main.460aae11.css.map",
+    "main.843da3ed.js.map": "/forte-group-star-wars/static/js/main.843da3ed.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.460aae11.css",
+    "static/js/main.843da3ed.js"
+  ]
+}
