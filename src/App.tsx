@@ -1,6 +1,8 @@
 import './styles/reset.css';
 import React from 'react';
 import Starfield from './components/StarfieldBackground/Starfield';
+import { Outlet } from 'react-router-dom';
+
 function App() {
   return (
     <>
@@ -9,8 +11,8 @@ function App() {
         starColor={[255, 255, 255]}
         speedFactor={0.05}
         backgroundColor="black"
-    />
-    <h1 style={{color: "white"}}>Hello</h1>
+      />
+      <Outlet/>
     </>
   );
 }
