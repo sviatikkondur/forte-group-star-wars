@@ -3,9 +3,9 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import { Link, useLocation } from 'react-router-dom';
-import { Drawer, useMediaQuery, useTheme } from '@mui/material';
+import { useMediaQuery, useTheme } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import mainLogo from '../../static/img/logo.png'
+import mainLogo from '../../static/img/logo.png';
 import { DrawerMenu } from '../Drawer/DrawerMenu';
 
 export const Header: React.FC = () => {
@@ -20,47 +20,47 @@ export const Header: React.FC = () => {
 
   const handleClose = () => {
     setIsOpen(false);
-  }
+  };
 
   return (
-    <Box sx={{opacity: '80%'}}>
-      <DrawerMenu 
+    <Box sx={{ opacity: '80%' }}>
+      <DrawerMenu
         isOpen={isOpen}
         handleClose={handleClose}
       />
 
       <AppBar
-        position="static" 
+        position='static'
         sx={{
           backgroundColor: '#272727',
           paddingInline: isMobileScreen ? 2 : 4,
         }}
         elevation={2}
+      >
+        <Toolbar
+          sx={{
+            height: isMobileScreen ? 85 : 130,
+            display: 'flex',
+            justifyContent: 'space-between',
+            gap: '16px',
+          }}
         >
-        <Toolbar sx={{
-          height: isMobileScreen ? 85 : 130,
-          display: 'flex',
-          justifyContent: 'space-between',
-          gap: '16px',
-        }}>
           {isMobileScreen && isHomePage && (
             <Box
               sx={{
                 color: 'inherit',
-                cursor: 'pointer'
+                cursor: 'pointer',
               }}
               onClick={() => setIsOpen(true)}
             >
-              <MenuIcon 
-                fontSize={isSmallScreen ? 'medium' : 'large'}
-              />
+              <MenuIcon fontSize={isSmallScreen ? 'medium' : 'large'} />
             </Box>
           )}
 
-          {!isMobileScreen && (<Box />)}
+          {!isMobileScreen && <Box />}
 
           <Link to='/'>
-            <Box 
+            <Box
               component={'img'}
               alt='Main Logo'
               src={mainLogo}
@@ -68,9 +68,9 @@ export const Header: React.FC = () => {
             />
           </Link>
 
-          <Box width={24}/>
+          <Box width={24} />
         </Toolbar>
       </AppBar>
     </Box>
-  )
-}
+  );
+};

@@ -1,10 +1,10 @@
-import { Grid } from '@mui/material'
-import React from 'react'
-import { Filters } from '../Filters/Filters'
+import { Grid } from '@mui/material';
+import React from 'react';
+import { Filters } from '../Filters/Filters';
 
 export const SideBar = () => {
   return (
-    <Grid 
+    <Grid
       item
       lg={3}
       height={'92%'}
@@ -12,10 +12,10 @@ export const SideBar = () => {
       sx={{
         backgroundColor: '#000000',
         border: '1px solid #1c1c1c',
-        borderRadius: 2
+        borderRadius: 2,
       }}
     >
       <Filters />
     </Grid>
-  )
-}
+  );
+};

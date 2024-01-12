@@ -1,5 +1,5 @@
-import { Box, CircularProgress, Typography } from '@mui/material'
-import React, { useEffect } from 'react'
+import { Box, CircularProgress, Typography } from '@mui/material';
+import React, { useEffect } from 'react';
 import { MovieSelect } from './components/MovieSelect';
 import { GenderRadio } from './components/GenderRadio';
 import { MassInput } from './components/MassInput';
@@ -8,7 +8,12 @@ import { getMovies } from '../../store/movies/moviesSlice';
 
 export const Filters = () => {
   const dispatch = useAppDispatch();
-  const { movies, loading, error, loaded } = useAppSelector((state) => state.moviesSlice);
+  const { movies, loading, error, loaded } = useAppSelector(
+    (state) => state.moviesSlice
+  );
+  const { loaded: MoviesLoaded } = useAppSelector(
+    (state) => state.charactersSlice
+  );
 
   useEffect(() => {
     if (!loaded) {
@@ -18,29 +23,33 @@ export const Filters = () => {
 
   return (
     <>
-      <Typography
-        variant={'h4'}
-        fontWeight={500}
-      >
-        Filters
-      </Typography>
       <Box
         height={'100%'}
         display={loading ? 'flex' : 'unset'}
         alignItems={'center'}
         justifyContent={'center'}
       >
-
-        {!loading && movies && (
+        {!loading && MoviesLoaded && movies && (
           <>
-            <MovieSelect movies={movies}/>
+            <Typography
+              variant={'h4'}
+              fontWeight={500}
+            >
+              Filters
+            </Typography>
+            <MovieSelect movies={movies} />
             <GenderRadio />
             <MassInput />
           </>
         )}
 
-        {loading && <CircularProgress size={70} color='warning' />}
+        {loading && !MoviesLoaded && (
+          <CircularProgress
+            size={70}
+            style={{ color: '#fff' }}
+          />
+        )}
       </Box>
     </>
-  )
-}
+  );
+};

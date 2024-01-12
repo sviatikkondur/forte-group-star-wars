@@ -1,9 +1,9 @@
-import { Container, Grid, useMediaQuery, useTheme } from '@mui/material'
-import React from 'react'
-import { SearchInput } from '../../components/SearchInput/SearchInput'
+import { Container, Grid, useMediaQuery, useTheme } from '@mui/material';
+import React from 'react';
+import { SearchInput } from '../../components/SearchInput/SearchInput';
 import { SideBar } from '../../components/SideBar/SideBar';
-import { CharactersList } from '../../components/CharactersList/CharactersList';
-  
+import { CharactersList } from '../../components/Characters/CharactersList';
+
 export const HomePage = () => {
   const theme = useTheme();
 
@@ -11,14 +11,14 @@ export const HomePage = () => {
   const isMobileScreen = useMediaQuery(theme.breakpoints.down('lg'));
 
   return (
-    <Container 
+    <Container
       maxWidth={'lg'}
       sx={{
         paddingTop: isSmallScreen ? '30px' : '40px',
         paddingBottom: '40px',
       }}
     >
-      <Grid 
+      <Grid
         container
         height={'100%'}
         display={'flex'}
@@ -31,5 +31,5 @@ export const HomePage = () => {
         <CharactersList />
       </Grid>
     </Container>
-  )
-}
+  );
+};
