@@ -1,21 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import logo from '../../static/icons/logo.png';
-import { Link } from 'react-router-dom';
-import { useMediaQuery, useTheme } from '@mui/material';
+import { Link, useLocation } from 'react-router-dom';
+import { Drawer, useMediaQuery, useTheme } from '@mui/material';
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
+import MenuIcon from '@mui/icons-material/Menu';
 import mainLogo from '../../static/img/logo.png'
 
-
 export const Header: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
   const theme = useTheme();
+
   const isMobileScreen = useMediaQuery(theme.breakpoints.down('lg'));
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
+  const isHomePage = location.pathname === '/';
+
   return (
     <Box>
+      <Drawer
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+      >
+
+        Hello
+      </Drawer>
+
       <AppBar
         position="static" 
         sx={{
@@ -25,21 +38,37 @@ export const Header: React.FC = () => {
         elevation={2}
         >
         <Toolbar sx={{
-          height: isMobileScreen ? 70 : 100,
+          height: isMobileScreen ? 85 : 130,
           display: 'flex',
           justifyContent: 'space-between',
           gap: '16px',
         }}>
-          <Link to='/'>
-            <Box 
-              component="img"
+          {isMobileScreen && isHomePage && (
+            <Box
               sx={{
-                height: isMobileScreen ? 70 : 100,
+                color: 'inherit',
+                cursor: 'pointer'
               }}
-              alt='Logo'
-              src={logo}
-            />
-          </Link>
+              onClick={() => setIsOpen(true)}
+            >
+              <MenuIcon 
+                fontSize={isSmallScreen ? 'medium' : 'large'}
+              />
+            </Box>
+          )}
+
+          {!isMobileScreen && (
+            <Link to='/'>
+              <Box 
+                component="img"
+                sx={{
+                  height: isMobileScreen ? 70 : 100,
+                }}
+                alt='Logo'
+                src={logo}
+              />
+            </Link>
+          )}
 
           <Box 
             component={'img'}
