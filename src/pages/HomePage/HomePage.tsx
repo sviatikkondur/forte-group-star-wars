@@ -6,22 +6,19 @@ import { CharactersList } from '../../components/Characters/CharactersList';
 
 export const HomePage = () => {
   const theme = useTheme();
-
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const isMobileScreen = useMediaQuery(theme.breakpoints.down('lg'));
 
   return (
     <Container
       maxWidth={'lg'}
       sx={{
-        paddingTop: isSmallScreen ? '30px' : '40px',
+        paddingTop: '20px',
         paddingBottom: '40px',
       }}
     >
       <Grid
         container
         height={'100%'}
-        // display={'flex'}
       >
         <SearchInput />
 

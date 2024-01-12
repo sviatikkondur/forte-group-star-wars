@@ -1,11 +1,33 @@
-import { Pagination, useMediaQuery, useTheme } from '@mui/material';
+import { styled, useTheme } from '@mui/system';
+import Pagination from '@mui/material/Pagination';
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getSearchWith } from '../../utils/searchHelper';
+import { useMediaQuery } from '@mui/material';
 
 type Props = {
   count: number;
 };
+
+const StyledPagination = styled(Pagination)(({ theme }) => ({
+  display: 'flex',
+  marginTop: '32px',
+  "& .MuiPaginationItem-root": {
+    border: "1px solid white",
+    color: '#fff',
+    '&:hover': {
+      color: '#000',
+      backgroundColor: '#cfcfcf',
+    },
+  },
+  '& .Mui-selected': {
+    backgroundColor: '#fff !important;',
+    color: '#000 !important;',
+    '&:hover': {
+      backgroundColor: '#fff',
+    },
+  },
+}));
 
 export const CharactersPagination: React.FC<Props> = ({ count }) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -17,7 +39,7 @@ export const CharactersPagination: React.FC<Props> = ({ count }) => {
 
   const handleChange = (event: React.ChangeEvent<unknown>, page: number) => {
     const newParams = getSearchWith(
-      searchParams, 
+      searchParams,
       { page: page === 1 ? null : String(page) }
     );
     setSearchParams(newParams);
@@ -31,34 +53,14 @@ export const CharactersPagination: React.FC<Props> = ({ count }) => {
   const value = searchParams.get('page') || '1';
 
   return (
-    <Pagination
+    <StyledPagination
       count={pagesCount}
       variant='outlined'
       shape='rounded'
       color='primary'
-      size={isSmallScreen ? 'small' : isMobileScreen  ? 'medium' : 'large'}
+      size={isSmallScreen ? 'small' : isMobileScreen ? 'medium' : 'large'}
       onChange={handleChange}
       page={+value}
-      sx={{
-        display: 'flex',
-        // alignSelf: 'flex-end',
-        marginTop: '32px',
-        "& .MuiPaginationItem-root": {
-          border: "1px solid white",
-          color: '#fff',
-          '&:hover': {
-            color: '#000',
-            backgroundColor: '#cfcfcf',
-          },
-        },
-        '& .Mui-selected': {
-          backgroundColor: '#fff',
-          color: '#000',
-          '&:hover': {
-            backgroundColor: '#fff',
-          },
-        },
-      }}
     />
   );
 };

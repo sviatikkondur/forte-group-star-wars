@@ -39,7 +39,7 @@ export const Header: React.FC = () => {
       >
         <Toolbar
           sx={{
-            height: isMobileScreen ? 85 : 130,
+            height: isMobileScreen ? 85 : 85,
             display: 'flex',
             justifyContent: 'space-between',
             gap: '16px',
