@@ -1,9 +1,20 @@
-import './styles/reset.css';
+import './styles/main.css';
 import React from 'react';
 import Starfield from './components/StarfieldBackground/Starfield';
 import { Outlet } from 'react-router-dom';
+import { ThemeProvider, createTheme } from '@mui/material';
+import { Header } from './components/Header/Header';
 
 function App() {
+  const theme = createTheme({
+    typography: {
+      fontFamily: 'Mont, sans-serif',
+      fontWeightRegular: 400,
+      fontWeightMedium: 600,
+      fontWeightBold: 700,
+    },
+  });
+
   return (
     <>
       <Starfield
@@ -12,7 +23,12 @@ function App() {
         speedFactor={0.05}
         backgroundColor="black"
       />
-      <Outlet/>
+      <Header />
+      <ThemeProvider theme={theme}>
+        <div style={{flex: 1, display: 'flex', alignItems: 'stretch'}}>
+          <Outlet />
+        </div>
+      </ThemeProvider>
     </>
   );
 }
