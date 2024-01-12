@@ -10,7 +10,7 @@ type Props = {
 export const CharactersPagination: React.FC<Props> = ({ count }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const pagesCount = Math.ceil(count / 6);
+  const pagesCount = Math.ceil(count / 8);
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const isMobileScreen = useMediaQuery(theme.breakpoints.down('lg'));
@@ -21,7 +21,14 @@ export const CharactersPagination: React.FC<Props> = ({ count }) => {
       { page: page === 1 ? null : String(page) }
     );
     setSearchParams(newParams);
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   };
+
+  const value = searchParams.get('page') || '1';
 
   return (
     <Pagination
@@ -31,8 +38,10 @@ export const CharactersPagination: React.FC<Props> = ({ count }) => {
       color='primary'
       size={isSmallScreen ? 'small' : isMobileScreen  ? 'medium' : 'large'}
       onChange={handleChange}
+      page={+value}
       sx={{
         display: 'flex',
+        // alignSelf: 'flex-end',
         marginTop: '32px',
         "& .MuiPaginationItem-root": {
           border: "1px solid white",

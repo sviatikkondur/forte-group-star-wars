@@ -49,10 +49,10 @@ export const NumberInputBasic: React.FC<Props> = ({ placeholder, type }) => {
     if (val !== undefined) {
       const newParams = type === 'min' 
         ? getSearchWith(
-          searchParams, {min: String(val)},
+          searchParams, {min: String(val), page: null},
         )
         : getSearchWith(
-          searchParams, {max: String(val)},
+          searchParams, {max: String(val), page: null},
         );
   
       setSearchParams(newParams);

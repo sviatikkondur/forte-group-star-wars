@@ -28,6 +28,7 @@ export const CharacterCard: React.FC<Props> = ({ character }) => {
       sx={{
         backgroundColor: '#424242',
         borderRadius: 5,
+        height: 'fit-content'
       }}
     >
       <Box
@@ -50,7 +51,10 @@ export const CharacterCard: React.FC<Props> = ({ character }) => {
           Name: {character.name}
         </Typography>
 
-        <Typography>
+        <Typography
+          noWrap
+          title={character.gender}
+        >
           Gender: {character.gender}
         </Typography>
 

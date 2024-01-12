@@ -5,8 +5,13 @@ import { GenderRadio } from './components/GenderRadio';
 import { MassInput } from './components/MassInput';
 import { useAppDispatch, useAppSelector } from '../../hooks/useTypedSelector';
 import { getMovies } from '../../store/movies/moviesSlice';
+import { ClearFilters } from './components/ClearFilters';
 
-export const Filters = () => {
+type Props = {
+  handleDrawerClose?: () => void;
+};
+
+export const Filters: React.FC<Props> = ({ handleDrawerClose }) => {
   const dispatch = useAppDispatch();
   const { movies, loading, error, loaded } = useAppSelector(
     (state) => state.moviesSlice
@@ -40,6 +45,8 @@ export const Filters = () => {
             <MovieSelect movies={movies} />
             <GenderRadio />
             <MassInput />
+
+            <ClearFilters handleDrawerClose={handleDrawerClose} />
           </>
         )}
 

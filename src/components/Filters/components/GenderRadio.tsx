@@ -11,13 +11,13 @@ export const GenderRadio = () => {
   const handleGenderChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value === 'all') {
       const newParams = getSearchWith(
-        searchParams, { gender: null },
+        searchParams, { gender: null, page: null },
       );
   
       setSearchParams(newParams);
     } else {
       const newParams = getSearchWith(
-        searchParams, { gender: e.target.value },
+        searchParams, { gender: e.target.value, page: null },
       );
   
       setSearchParams(newParams);

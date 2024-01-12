@@ -17,7 +17,7 @@ export const MovieSelect: React.FC<Props> = ({ movies }) => {
 
   const handleSelectChange = (e: SelectChangeEvent<HTMLInputElement>) => {
     const newParams = getSearchWith(
-      searchParams, { movie: e.target.value as string || null },
+      searchParams, { movie: e.target.value as string || null, page: null },
     );
 
     setSearchParams(newParams);

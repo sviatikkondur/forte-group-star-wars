@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/useTypedSelector';
 import { getAllStarwarsPeople } from '../../store/characters/charactersSlice';
 import {
@@ -11,16 +11,45 @@ import {
 } from '@mui/material';
 import { CharacterCard } from './components/CharacterCard';
 import { CharactersPagination } from '../Pagination/Pagination';
+import { useSearchParams } from 'react-router-dom';
+import { StarWarsCharacter } from '../../types/TCharacter';
 
 export const CharactersList = () => {
+  const [visibleCharacters, setVisibleCharacters] = useState<
+    StarWarsCharacter[]
+  >([]);
+  const [count, setCount] = useState(0);
+  const [searchParams] = useSearchParams();
   const dispatch = useAppDispatch();
   const theme = useTheme();
-
-  const isMobileScreen = useMediaQuery(theme.breakpoints.down('lg'));
 
   const { characters, error, loading, loaded } = useAppSelector(
     (state) => state.charactersSlice
   );
+
+  const { movies } = useAppSelector((state) => state.moviesSlice);
+
+  const getMovieUrl = useCallback(
+    (title: string) => {
+      if (movies) {
+        const movie = movies.find((m) => m.title === title);
+
+        return movie ? movie.url : '';
+      }
+    },
+    [movies]
+  );
+
+  const query = searchParams.get('query') || '';
+  const movie = searchParams.get('movie');
+  const gender = searchParams.get('gender');
+  const minMass = searchParams.get('min');
+  const maxMass = searchParams.get('max');
+  const page = searchParams.get('page') || '1';
+
+  const isMobileScreen = useMediaQuery(theme.breakpoints.down('lg'));
+
+  const charactersPerPage = 8;
 
   useEffect(() => {
     if (!loaded) {
@@ -28,7 +57,34 @@ export const CharactersList = () => {
     }
   }, [loaded, dispatch]);
 
-  console.log({ characters, error, loading, loaded });
+  useEffect(() => {
+    if (characters) {
+      let filteredCharacters = characters.filter((character) => {
+        return (
+          character.name.toLowerCase().includes(query.toLowerCase()) &&
+          (movie
+            ? character.films.includes(getMovieUrl(movie) as string)
+            : true) &&
+          (gender ? character.gender === gender : true) &&
+          (minMass
+            ? parseFloat(character.mass.replace(/,/g, '')) >= parseFloat(minMass)
+            : true) &&
+          (maxMass ? parseFloat(character.mass.replace(/,/g, '')) <= parseFloat(maxMass) : true)
+        );
+      });
+
+      setCount(filteredCharacters.length);
+
+      const indexOfLastCharacter = +page * charactersPerPage;
+      const indexOfFirstCharacter = indexOfLastCharacter - charactersPerPage;
+      const currentCharacters = filteredCharacters.slice(
+        indexOfFirstCharacter,
+        indexOfLastCharacter
+      );
+
+      setVisibleCharacters(currentCharacters);
+    }
+  }, [characters, query, movie, gender, minMass, maxMass, page, getMovieUrl]);
 
   return (
     <Grid
@@ -64,7 +120,6 @@ export const CharactersList = () => {
           padding={'15px 15px 40px'}
           display={'flex'}
           flexDirection={'column'}
-          justifyContent={'space-between'}
           alignItems={'center'}
           sx={{
             backgroundColor: 'black',
@@ -84,20 +139,36 @@ export const CharactersList = () => {
           <Grid
             container
             display={'flex'}
-            justifyContent={'center'}
+            justifyContent={
+              visibleCharacters.length === 8 ? 'center' : 'flex-start'
+            }
             width={'100%'}
+            height={'100%'}
             gap={3}
             marginTop={3}
           >
-            {characters.slice(0, 8).map((character) => (
+            {visibleCharacters.map((character) => (
               <CharacterCard
                 key={character.name}
                 character={character}
               />
             ))}
+
+            {visibleCharacters.length === 0 && !loading && (
+              <Typography
+                width={'100%'}
+                textAlign={'center'}
+                alignSelf={'center'}
+                variant={'h5'}
+              >
+                Character not found!
+              </Typography>
+            )}
           </Grid>
 
-          <CharactersPagination count={82} />
+          {visibleCharacters.length > 0 && (
+            <CharactersPagination count={count} />
+          )}
         </Box>
       )}
     </Grid>

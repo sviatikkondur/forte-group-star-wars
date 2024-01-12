@@ -35,7 +35,7 @@ export const DrawerMenu: React.FC<Props> = ({isOpen, handleClose}) => {
           fontSize='large'
         />
       </Box>
-      <Filters />
+      <Filters handleDrawerClose={handleClose}/>
     </Drawer>
   )
 }

@@ -47,6 +47,7 @@ export const SearchInput = () => {
           variant="outlined"
           value={query}
           onChange={handleQueryChange}
+          placeholder='Search a character'
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">

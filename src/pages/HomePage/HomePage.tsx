@@ -21,8 +21,7 @@ export const HomePage = () => {
       <Grid
         container
         height={'100%'}
-        display={'flex'}
-        alignContent={'flex-start'}
+        // display={'flex'}
       >
         <SearchInput />
 
