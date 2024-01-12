@@ -1,20 +1,35 @@
-import { Container, useMediaQuery, useTheme } from '@mui/material'
+import { Container, Grid, useMediaQuery, useTheme } from '@mui/material'
 import React from 'react'
 import { SearchInput } from '../../components/SearchInput/SearchInput'
+import { SideBar } from '../../components/SideBar/SideBar';
+import { CharactersList } from '../../components/CharactersList/CharactersList';
   
 export const HomePage = () => {
   const theme = useTheme();
 
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobileScreen = useMediaQuery(theme.breakpoints.down('lg'));
 
   return (
     <Container 
       maxWidth={'lg'}
       sx={{
-        paddingTop: isSmallScreen ? '30px' : '40px'
+        paddingTop: isSmallScreen ? '30px' : '40px',
+        paddingBottom: '40px',
       }}
     >
-      <SearchInput />
+      <Grid 
+        container
+        height={'100%'}
+        display={'flex'}
+        alignContent={'flex-start'}
+      >
+        <SearchInput />
+
+        {!isMobileScreen && <SideBar />}
+
+        <CharactersList />
+      </Grid>
     </Container>
   )
 }

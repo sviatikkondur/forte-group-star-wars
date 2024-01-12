@@ -17,20 +17,20 @@ export const getCharacters = createAsyncThunk(
   }
 );
 
-interface ProductsState {
+interface CharactersState {
   loading: boolean;
   error: null | string;
-  products: null | StarWarsCharacter[];
+  characters: null | StarWarsCharacter[];
 }
 
 const initialState = {
   loading: true,
   error: null,
-  products: null,
-} as ProductsState;
+  characters: null,
+} as CharactersState;
 
 const charactersSlice = createSlice({
-  name: "products",
+  name: "characters",
   initialState,
   reducers: {},
   extraReducers(builder) {
@@ -39,7 +39,7 @@ const charactersSlice = createSlice({
     })
     .addCase(getCharacters.fulfilled, (state, action: PayloadAction<StarWarsCharacter[]> ) => {
       state.loading = false;
-      state.products = action.payload;
+      state.characters = action.payload;
     })
     .addCase(getCharacters.rejected, (state, action: PayloadAction<any>) => {
       state.loading = false;

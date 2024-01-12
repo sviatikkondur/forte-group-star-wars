@@ -1,9 +1,10 @@
 import './styles/main.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Starfield from './components/StarfieldBackground/Starfield';
 import { Outlet } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material';
 import { Header } from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 
 function App() {
   const theme = createTheme({
@@ -23,11 +24,12 @@ function App() {
         speedFactor={0.05}
         backgroundColor="black"
       />
-      <Header />
       <ThemeProvider theme={theme}>
+        <Header />
         <div style={{flex: 1, display: 'flex', alignItems: 'stretch'}}>
           <Outlet />
         </div>
+        <Footer />
       </ThemeProvider>
     </>
   );

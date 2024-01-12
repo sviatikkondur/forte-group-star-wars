@@ -1,4 +1,4 @@
-import { FormControl, InputAdornment, TextField, useMediaQuery, useTheme } from '@mui/material'
+import { FormControl, Grid, InputAdornment, TextField, useMediaQuery, useTheme } from '@mui/material'
 import React, { useState } from 'react'
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -35,12 +35,13 @@ export const SearchInput = () => {
   }
 
   return (
-    <FormControl
-      fullWidth
-      sx={{
-        margin: 0,
-      }}
-    >
+    <Grid item xs={12} marginBottom={3}>
+      <FormControl
+        fullWidth
+        sx={{
+          margin: 0,
+        }}
+      >
         <TextField
           size={isSmallScreen ? "small" : "medium"}
           variant="outlined"
@@ -71,5 +72,6 @@ export const SearchInput = () => {
           }}
         />
       </FormControl>
+    </Grid>
   )
 }

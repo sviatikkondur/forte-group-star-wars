@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import logo from '../../static/icons/logo.png';
 import { Link, useLocation } from 'react-router-dom';
 import { Drawer, useMediaQuery, useTheme } from '@mui/material';
-import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 import MenuIcon from '@mui/icons-material/Menu';
 import mainLogo from '../../static/img/logo.png'
+import { DrawerMenu } from '../Drawer/DrawerMenu';
 
 export const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,15 +18,16 @@ export const Header: React.FC = () => {
 
   const isHomePage = location.pathname === '/';
 
-  return (
-    <Box>
-      <Drawer
-        open={isOpen}
-        onClose={() => setIsOpen(false)}
-      >
+  const handleClose = () => {
+    setIsOpen(false);
+  }
 
-        Hello
-      </Drawer>
+  return (
+    <Box sx={{opacity: '80%'}}>
+      <DrawerMenu 
+        isOpen={isOpen}
+        handleClose={handleClose}
+      />
 
       <AppBar
         position="static" 
@@ -57,34 +57,18 @@ export const Header: React.FC = () => {
             </Box>
           )}
 
-          {!isMobileScreen && (
-            <Link to='/'>
-              <Box 
-                component="img"
-                sx={{
-                  height: isMobileScreen ? 70 : 100,
-                }}
-                alt='Logo'
-                src={logo}
-              />
-            </Link>
-          )}
+          {!isMobileScreen && (<Box />)}
 
-          <Box 
-            component={'img'}
-            alt='Main Logo'
-            src={mainLogo}
-            width={isSmallScreen ? '40vw' : 'auto'}
-          />
-
-          
-          <Link to='/favorites' style={{
-            color: 'inherit'
-          }}>
-            <FavoriteBorderRoundedIcon 
-              fontSize={'medium'} 
+          <Link to='/'>
+            <Box 
+              component={'img'}
+              alt='Main Logo'
+              src={mainLogo}
+              width={isSmallScreen ? '40vw' : 'auto'}
             />
           </Link>
+
+          <Box width={24}/>
         </Toolbar>
       </AppBar>
     </Box>
