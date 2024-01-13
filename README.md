@@ -5,6 +5,8 @@
 [DEMO LINK](https://sviatikkondur.github.io/forte-group-star-wars/#/)
 <br />
 
+![Website](https://github.com/sviatikkondur/forte-group-star-wars/assets/107207978/de4667e7-a9c9-46f9-9cec-2c1cf86f9175)
+
 # Forte Group Star Wars Characters Website
 
 Welcome to the Forte Group Star Wars Characters Website, your ultimate destination for exploring the vast galaxy of Star Wars characters. Powered by the SWAPI API(slow API), this website provides detailed information about your favorite characters from the Star Wars universe. Let's take a closer look at the technologies and libraries used to bring this immersive experience to life. Character filtering and searching is implemented on FE, due to the lack of this functionality in the API. I also added a pagination, but still no pagination logic on backend, so I fetch all characters first. The first loading is slow due to this. The site looks good to me, it is responsive. Also, it has an interest sound when you click on the character card. TRY IT!
