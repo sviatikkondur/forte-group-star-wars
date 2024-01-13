@@ -1,16 +1,17 @@
 {
   "files": {
     "main.css": "/forte-group-star-wars/static/css/main.8cb73f40.css",
-    "main.js": "/forte-group-star-wars/static/js/main.8468c113.js",
+    "main.js": "/forte-group-star-wars/static/js/main.117b1fb0.js",
+    "static/media/sword.wav": "/forte-group-star-wars/static/media/sword.3fef72ab91e057c0014d.wav",
     "static/media/Mont-Regular.ttf": "/forte-group-star-wars/static/media/Mont-Regular.e797167c18f9897bb607.ttf",
     "static/media/Mont-SemiBold.ttf": "/forte-group-star-wars/static/media/Mont-SemiBold.0b5e68ebb36ca4006e21.ttf",
     "static/media/Mont-Bold.ttf": "/forte-group-star-wars/static/media/Mont-Bold.3675b597d3ffb2b75168.ttf",
     "index.html": "/forte-group-star-wars/index.html",
     "main.8cb73f40.css.map": "/forte-group-star-wars/static/css/main.8cb73f40.css.map",
-    "main.8468c113.js.map": "/forte-group-star-wars/static/js/main.8468c113.js.map"
+    "main.117b1fb0.js.map": "/forte-group-star-wars/static/js/main.117b1fb0.js.map"
   },
   "entrypoints": [
     "static/css/main.8cb73f40.css",
-    "static/js/main.8468c113.js"
+    "static/js/main.117b1fb0.js"
   ]
 }
