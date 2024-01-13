@@ -3,24 +3,26 @@ import React from 'react'
 import { Filters } from '../Filters/Filters'
 import CloseIcon from '@mui/icons-material/Close';
 
-type Props = {
-  isOpen: boolean,
-  handleClose: () => void,
-}
+const ICON_SIZE = 'large';
 
-export const DrawerMenu: React.FC<Props> = ({isOpen, handleClose}) => {
+type Props = {
+  isOpen: boolean;
+  handleClose: () => void;
+};
+
+export const DrawerMenu: React.FC<Props> = ({ isOpen, handleClose }) => {
+  const drawerPaperStyles = {
+    width: '288px',
+    padding: '15px',
+    backgroundColor: 'black',
+    color: 'white',
+  };
+
   return (
     <Drawer
       open={isOpen}
       onClose={handleClose}
-      PaperProps={{ 
-        style: {
-          width: '288px',
-          padding: '15px',
-          backgroundColor: 'black',
-          color: 'white',
-        } 
-      }}
+      PaperProps={{ style: drawerPaperStyles }}
     >
       <Box
         sx={{
@@ -31,11 +33,9 @@ export const DrawerMenu: React.FC<Props> = ({isOpen, handleClose}) => {
         }}
         onClick={handleClose}
       >
-        <CloseIcon 
-          fontSize='large'
-        />
+        <CloseIcon fontSize={ICON_SIZE} />
       </Box>
-      <Filters handleDrawerClose={handleClose}/>
+      <Filters handleDrawerClose={handleClose} />
     </Drawer>
-  )
-}
+  );
+};

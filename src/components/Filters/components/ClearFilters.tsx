@@ -5,24 +5,31 @@ import React from 'react';
 
 type Props = {
   handleDrawerClose?: () => void;
-}
+};
+
+const buttonStyles = {
+  marginTop: 4,
+  backgroundColor: '#606060',
+  color: '#ffffff',
+  '&:hover': {
+    backgroundColor: '#737272',
+  },
+};
 
 export const ClearFilters: React.FC<Props> = ({ handleDrawerClose }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const handleClearFilters = () => {
-    const newParams = getSearchWith(
-      searchParams, { 
-        query: null,
-        movie: null,
-        gender: null,
-        min: null,
-        max: null,
-      },
-    );
+    const newParams = getSearchWith(searchParams, {
+      query: null,
+      movie: null,
+      gender: null,
+      min: null,
+      max: null,
+    });
 
     setSearchParams(newParams);
-    
+
     if (handleDrawerClose) {
       handleDrawerClose();
     }
@@ -33,14 +40,7 @@ export const ClearFilters: React.FC<Props> = ({ handleDrawerClose }) => {
       fullWidth
       variant='contained'
       size='large'
-      sx={{
-        marginTop: 4,
-        backgroundColor: '#606060',
-        color: '#ffffff',
-        '&:hover': {
-          backgroundColor: '#737272', 
-        },
-      }}
+      sx={buttonStyles}
       onClick={handleClearFilters}
     >
       Clear Filters

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/useTypedSelector';
 import { getAllStarwarsPeople } from '../../store/characters/charactersSlice';
 import {
@@ -12,13 +12,9 @@ import {
 import { CharacterCard } from './components/CharacterCard';
 import { CharactersPagination } from '../Pagination/Pagination';
 import { useSearchParams } from 'react-router-dom';
-import { StarWarsCharacter } from '../../types/TCharacter';
+import { getVisibleCharacters } from '../../utils/getVisibleCharacters';
 
 export const CharactersList = () => {
-  const [visibleCharacters, setVisibleCharacters] = useState<
-    StarWarsCharacter[]
-  >([]);
-  const [count, setCount] = useState(0);
   const [searchParams] = useSearchParams();
   const dispatch = useAppDispatch();
   const theme = useTheme();
@@ -49,42 +45,21 @@ export const CharactersList = () => {
 
   const isMobileScreen = useMediaQuery(theme.breakpoints.down('lg'));
 
-  const charactersPerPage = 8;
-
   useEffect(() => {
     if (!loaded) {
       dispatch(getAllStarwarsPeople());
     }
   }, [loaded, dispatch]);
 
-  useEffect(() => {
-    if (characters) {
-      let filteredCharacters = characters.filter((character) => {
-        return (
-          character.name.toLowerCase().includes(query.toLowerCase()) &&
-          (movie
-            ? character.films.includes(getMovieUrl(movie) as string)
-            : true) &&
-          (gender ? character.gender === gender : true) &&
-          (minMass
-            ? parseFloat(character.mass.replace(/,/g, '')) >= parseFloat(minMass)
-            : true) &&
-          (maxMass ? parseFloat(character.mass.replace(/,/g, '')) <= parseFloat(maxMass) : true)
-        );
-      });
-
-      setCount(filteredCharacters.length);
-
-      const indexOfLastCharacter = +page * charactersPerPage;
-      const indexOfFirstCharacter = indexOfLastCharacter - charactersPerPage;
-      const currentCharacters = filteredCharacters.slice(
-        indexOfFirstCharacter,
-        indexOfLastCharacter
-      );
-
-      setVisibleCharacters(currentCharacters);
-    }
-  }, [characters, query, movie, gender, minMass, maxMass, page, getMovieUrl]);
+  const { visibleCharacters, count } = getVisibleCharacters({
+    characters,
+    gender,
+    maxMass,
+    minMass,
+    movieUrl: getMovieUrl(movie as string),
+    page,
+    query,
+  });
 
   return (
     <Grid

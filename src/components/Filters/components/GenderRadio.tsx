@@ -1,40 +1,44 @@
-import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material'
-import React, { ChangeEvent } from 'react'
+import {
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
+} from '@mui/material';
+import React, { ChangeEvent } from 'react';
 import { getSearchWith } from '../../../utils/searchHelper';
 import { useSearchParams } from 'react-router-dom';
 
-export const GenderRadio = () => {
+enum Gender {
+  ALL = 'all',
+  MALE = 'male',
+  FEMALE = 'female',
+}
+
+type GenderRadioProps = {};
+
+export const GenderRadio: React.FC<GenderRadioProps> = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const value = searchParams.get('gender') || 'all';
+  const value = searchParams.get('gender') || Gender.ALL;
 
   const handleGenderChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value === 'all') {
-      const newParams = getSearchWith(
-        searchParams, { gender: null, page: null },
-      );
-  
-      setSearchParams(newParams);
-    } else {
-      const newParams = getSearchWith(
-        searchParams, { gender: e.target.value, page: null },
-      );
-  
-      setSearchParams(newParams);
-    }
-  }
+    const newGender = e.target.value as Gender;
+    const newParams = getSearchWith(searchParams, {
+      gender: newGender === Gender.ALL ? null : newGender,
+      page: null,
+    });
+
+    setSearchParams(newParams);
+  };
 
   return (
-    <FormControl 
-      sx={{
-        marginTop: 1.5
-      }}
-    >
-      <FormLabel 
-        id="demo-radio-buttons-group-label" 
+    <FormControl sx={{ marginTop: 1.5 }}>
+      <FormLabel
+        id='demo-radio-buttons-group-label'
         sx={{
-          color: 'white', 
-          fontSize: 23, 
+          color: 'white',
+          fontSize: 23,
           marginBottom: 0.3,
           '&.Mui-focused': {
             color: 'white',
@@ -45,42 +49,24 @@ export const GenderRadio = () => {
       </FormLabel>
 
       <RadioGroup
-        aria-labelledby="gender-radio-buttons-group-label"
+        aria-labelledby='gender-radio-buttons-group-label'
         value={value}
-        name="radio-buttons-group"
-        onChange={(e: ChangeEvent<HTMLInputElement>) => handleGenderChange(e)}
+        name='radio-buttons-group'
+        onChange={handleGenderChange}
       >
-        <FormControlLabel 
-          value="all" 
-          control={<Radio sx={{
-            color: 'white',
-            '&.Mui-checked': {
-              color: 'white',
-            },
-          }} />} 
-          label="All" 
-        />
-        <FormControlLabel 
-          value="male" 
-          control={<Radio sx={{
-            color: 'white',
-            '&.Mui-checked': {
-              color: 'white',
-            },
-          }} />} 
-          label="Male" 
-        />
-        <FormControlLabel 
-          value="female" 
-          control={<Radio sx={{
-            color: 'white',
-            '&.Mui-checked': {
-              color: 'white',
-            },
-          }} />} 
-          label="Female" 
-        />
+        {Object.values(Gender).map((genderOption) => (
+          <FormControlLabel
+            key={genderOption}
+            value={genderOption}
+            control={
+              <Radio
+                sx={{ color: 'white', '&.Mui-checked': { color: 'white' } }}
+              />
+            }
+            label={genderOption.charAt(0).toUpperCase() + genderOption.slice(1)}
+          />
+        ))}
       </RadioGroup>
     </FormControl>
-  )
-}
+  );
+};

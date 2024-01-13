@@ -8,6 +8,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import mainLogo from '../../static/img/logo.png';
 import { DrawerMenu } from '../Drawer/DrawerMenu';
 
+const MOBILE_MENU_ICON_SIZE = 'large';
+const HEADER_HEIGHT_MOBILE = 85;
+const HEADER_HEIGHT_DESKTOP = 85;
+
 export const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
@@ -22,27 +26,26 @@ export const Header: React.FC = () => {
     setIsOpen(false);
   };
 
+  const mobileMenuIconSize = isSmallScreen ? 'medium' : MOBILE_MENU_ICON_SIZE;
+
   return (
     <Box sx={{ opacity: '80%' }}>
-      <DrawerMenu
-        isOpen={isOpen}
-        handleClose={handleClose}
-      />
+      <DrawerMenu isOpen={isOpen} handleClose={handleClose} />
 
       <AppBar
         position='static'
         sx={{
           backgroundColor: '#272727',
-          paddingInline: isMobileScreen ? 2 : 4,
+          paddingInline: isMobileScreen ? theme.spacing(2) : theme.spacing(4),
         }}
         elevation={2}
       >
         <Toolbar
           sx={{
-            height: isMobileScreen ? 85 : 85,
+            height: isMobileScreen ? HEADER_HEIGHT_MOBILE : HEADER_HEIGHT_DESKTOP,
             display: 'flex',
             justifyContent: 'space-between',
-            gap: '16px',
+            gap: theme.spacing(2),
           }}
         >
           {isMobileScreen && isHomePage && (
@@ -53,7 +56,7 @@ export const Header: React.FC = () => {
               }}
               onClick={() => setIsOpen(true)}
             >
-              <MenuIcon fontSize={isSmallScreen ? 'medium' : 'large'} />
+              <MenuIcon fontSize={mobileMenuIconSize} />
             </Box>
           )}
 
@@ -68,7 +71,7 @@ export const Header: React.FC = () => {
             />
           </Link>
 
-          <Box width={24} />
+          <Box width={theme.spacing(2)} />
         </Toolbar>
       </AppBar>
     </Box>

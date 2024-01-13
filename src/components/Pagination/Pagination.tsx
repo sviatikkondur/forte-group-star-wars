@@ -9,48 +9,51 @@ type Props = {
   count: number;
 };
 
+const ITEMS_PER_PAGE = 8;
+const PAGE_SIZE = 1;
+
 const StyledPagination = styled(Pagination)(({ theme }) => ({
   display: 'flex',
-  marginTop: '32px',
-  "& .MuiPaginationItem-root": {
-    border: "1px solid white",
-    color: '#fff',
+  marginTop: theme.spacing(4),
+  '& .MuiPaginationItem-root': {
+    border: `1px solid ${theme.palette.common.white}`,
+    color: theme.palette.common.white,
     '&:hover': {
-      color: '#000',
-      backgroundColor: '#cfcfcf',
+      color: theme.palette.common.black,
+      backgroundColor: theme.palette.grey[300],
     },
   },
   '& .Mui-selected': {
-    backgroundColor: '#fff !important;',
-    color: '#000 !important;',
+    backgroundColor: `${theme.palette.common.white} !important`,
+    color: `${theme.palette.common.black} !important`,
     '&:hover': {
-      backgroundColor: '#fff',
+      backgroundColor: theme.palette.common.white,
     },
   },
 }));
 
 export const CharactersPagination: React.FC<Props> = ({ count }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-
-  const pagesCount = Math.ceil(count / 8);
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const isMobileScreen = useMediaQuery(theme.breakpoints.down('lg'));
 
+  const pagesCount = Math.ceil(count / ITEMS_PER_PAGE);
+
   const handleChange = (event: React.ChangeEvent<unknown>, page: number) => {
     const newParams = getSearchWith(
       searchParams,
-      { page: page === 1 ? null : String(page) }
+      { page: page === PAGE_SIZE ? null : String(page) }
     );
     setSearchParams(newParams);
 
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
   };
 
-  const value = searchParams.get('page') || '1';
+  const value = searchParams.get('page') || String(PAGE_SIZE);
 
   return (
     <StyledPagination

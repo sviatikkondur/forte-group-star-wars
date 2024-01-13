@@ -1,10 +1,10 @@
-import React from 'react'
-import { StarWarsCharacter } from '../../../types/TCharacter'
-import { Box, Grid, Typography, useMediaQuery, useTheme } from '@mui/material'
+import React from 'react';
+import { StarWarsCharacter } from '../../../types/TCharacter';
+import { Box, Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 
 type Props = {
-  character: StarWarsCharacter
-}
+  character: StarWarsCharacter;
+};
 
 function extractIdFromUrl(url: string): number | null {
   const matches = url.match(/\/(\d+)\/$/);
@@ -20,18 +20,18 @@ export const CharacterCard: React.FC<Props> = ({ character }) => {
   const isMobileScreen = useMediaQuery(theme.breakpoints.down('lg'));
 
   const id = extractIdFromUrl(character.url);
-  const imgSrc = `https://storage.googleapis.com/starwars-images/people/${id}.jpg`
+  const imgSrc = `https://storage.googleapis.com/starwars-images/people/${id}.jpg`;
 
   return (
-    <Grid 
+    <Grid
       item
       xs={12}
-      sm={5} 
+      sm={5}
       lg={2.6}
       sx={{
         backgroundColor: '#424242',
         borderRadius: 5,
-        height: 'fit-content'
+        height: 'fit-content',
       }}
     >
       <Box
@@ -46,12 +46,12 @@ export const CharacterCard: React.FC<Props> = ({ character }) => {
         }}
       />
       <br />
-      
+
       <Box
         padding={'0 10px 10px'}
         marginTop={1}
       >
-        <Typography 
+        <Typography
           noWrap
           title={character.name}
         >
@@ -66,10 +66,13 @@ export const CharacterCard: React.FC<Props> = ({ character }) => {
         </Typography>
 
         <Typography>
-          Mass: {character.mass} kg
+          Mass:{' '}
+          {character.mass === 'unknown'
+            ? character.mass
+            : `${character.mass} kg`
+          }
         </Typography>
       </Box>
-      
     </Grid>
-  )
-}
+  );
+};
