@@ -5,7 +5,7 @@
 [DEMO LINK](https://sviatikkondur.github.io/forte-group-star-wars/#/)
 <br />
 
-![Website](https://github.com/sviatikkondur/forte-group-star-wars/assets/107207978/de4667e7-a9c9-46f9-9cec-2c1cf86f9175)
+![website-wide](https://github.com/sviatikkondur/forte-group-star-wars/assets/107207978/4d9a610b-c883-43bc-87d9-7e3a04eabc95)
 
 # Forte Group Star Wars Characters Website
 
