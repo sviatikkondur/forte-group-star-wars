@@ -19,7 +19,6 @@ type Species = {
 };
 
 const fetchSpeciesName = async (url: string): Promise<string> => {
-  console.log(url);
   try {
     const response = await axios.get<Species>(url);
     return response.data.name;
