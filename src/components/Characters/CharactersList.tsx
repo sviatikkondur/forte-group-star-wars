@@ -13,6 +13,7 @@ import { CharacterCard } from './components/CharacterCard';
 import { CharactersPagination } from '../Pagination/Pagination';
 import { useSearchParams } from 'react-router-dom';
 import { getVisibleCharacters } from '../../utils/getVisibleCharacters';
+import { ErrorModal } from '../ErrorModal/ErrorModal';
 
 export const CharactersList = () => {
   const [searchParams] = useSearchParams();
@@ -146,6 +147,8 @@ export const CharactersList = () => {
           )}
         </Box>
       )}
+
+      {error && <ErrorModal />}
     </Grid>
   );
 };

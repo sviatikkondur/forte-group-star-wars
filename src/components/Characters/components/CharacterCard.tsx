@@ -1,6 +1,8 @@
 import React from 'react';
 import { StarWarsCharacter } from '../../../types/TCharacter';
 import { Box, Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import swordAudio from '../../../static/audio/sword.wav';
 
 type Props = {
   character: StarWarsCharacter;
@@ -14,8 +16,13 @@ function extractIdFromUrl(url: string): number | null {
   return null;
 }
 
+const playAudio = () => {
+  new Audio(swordAudio).play();
+};
+
 export const CharacterCard: React.FC<Props> = ({ character }) => {
   const theme = useTheme();
+  const navigate = useNavigate();
 
   const isMobileScreen = useMediaQuery(theme.breakpoints.down('lg'));
 
@@ -29,9 +36,19 @@ export const CharacterCard: React.FC<Props> = ({ character }) => {
       sm={5}
       lg={2.6}
       sx={{
+        boxSizing: 'border-box',
         backgroundColor: '#424242',
-        borderRadius: 5,
+        borderRadius: '5px 5px 20px 20px',
+        border: '2px solid #424242',
         height: 'fit-content',
+        cursor: 'pointer',
+        '&:hover': {
+          border: '2px solid #ffffff',
+        },
+      }}
+      onClick={() => {
+        navigate(`/characters/${id}`);
+        playAudio();
       }}
     >
       <Box

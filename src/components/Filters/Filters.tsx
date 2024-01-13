@@ -30,7 +30,7 @@ export const Filters: React.FC<Props> = ({ handleDrawerClose }) => {
     <>
       <Box
         height={'100%'}
-        display={loading ? 'flex' : 'unset'}
+        display={loading || !MoviesLoaded ? 'flex' : 'unset'}
         alignItems={'center'}
         justifyContent={'center'}
       >
@@ -50,7 +50,7 @@ export const Filters: React.FC<Props> = ({ handleDrawerClose }) => {
           </>
         )}
 
-        {loading && !MoviesLoaded && (
+        {(loading || !MoviesLoaded) && (
           <CircularProgress
             size={70}
             style={{ color: '#fff' }}

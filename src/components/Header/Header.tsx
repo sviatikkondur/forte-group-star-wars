@@ -44,7 +44,7 @@ export const Header: React.FC = () => {
           sx={{
             height: isMobileScreen ? HEADER_HEIGHT_MOBILE : HEADER_HEIGHT_DESKTOP,
             display: 'flex',
-            justifyContent: 'space-between',
+            justifyContent: isHomePage ? 'space-between' : 'center',
             gap: theme.spacing(2),
           }}
         >
