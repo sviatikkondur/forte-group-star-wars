@@ -3,10 +3,11 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import { Link, useLocation } from 'react-router-dom';
-import { useMediaQuery, useTheme } from '@mui/material';
+import { useTheme } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import mainLogo from '../../static/img/logo.png';
 import { DrawerMenu } from '../Drawer/DrawerMenu';
+import { useScreenSize } from '../../hooks/useScreenSize';
 
 const MOBILE_MENU_ICON_SIZE = 'large';
 const HEADER_HEIGHT_MOBILE = 85;
@@ -17,8 +18,7 @@ export const Header: React.FC = () => {
   const location = useLocation();
   const theme = useTheme();
 
-  const isMobileScreen = useMediaQuery(theme.breakpoints.down('lg'));
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const { isMobileScreen, isSmallScreen } = useScreenSize();
 
   const isHomePage = location.pathname === '/';
 
@@ -30,7 +30,10 @@ export const Header: React.FC = () => {
 
   return (
     <Box sx={{ opacity: '80%' }}>
-      <DrawerMenu isOpen={isOpen} handleClose={handleClose} />
+      <DrawerMenu
+        isOpen={isOpen}
+        handleClose={handleClose}
+      />
 
       <AppBar
         position='static'
@@ -42,7 +45,9 @@ export const Header: React.FC = () => {
       >
         <Toolbar
           sx={{
-            height: isMobileScreen ? HEADER_HEIGHT_MOBILE : HEADER_HEIGHT_DESKTOP,
+            height: isMobileScreen
+              ? HEADER_HEIGHT_MOBILE
+              : HEADER_HEIGHT_DESKTOP,
             display: 'flex',
             justifyContent: isHomePage ? 'space-between' : 'center',
             gap: theme.spacing(2),

@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
   CircularProgress,
   Container,
-  Grid,
-  useMediaQuery,
-  useTheme,
+  Grid
 } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { StarWarsCharacter } from '../../types/TCharacter';
@@ -17,6 +15,7 @@ import { getMovies } from '../../store/movies/moviesSlice';
 import { getStarshipTitles } from '../../utils/getStarshipsNames';
 import { ErrorModal } from '../../components/ErrorModal/ErrorModal';
 import { getSpeciesNames } from '../../utils/getSpecies';
+import { useScreenSize } from '../../hooks/useScreenSize';
 
 export const CharacterPage = () => {
   const [character, setCharacter] = useState<StarWarsCharacter | null>(null);
@@ -31,12 +30,10 @@ export const CharacterPage = () => {
   const dispatch = useAppDispatch();
 
   const { id } = useParams();
-  const theme = useTheme();
 
   const imgSrc = `https://storage.googleapis.com/starwars-images/people/${id}.jpg`;
 
-  const isMediumScreen = useMediaQuery(theme.breakpoints.down('md'));
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const { isMobileScreen, isSmallScreen } = useScreenSize();
 
   const getMoviesTitle = () => {
     if (movies && character) {
@@ -136,12 +133,12 @@ export const CharacterPage = () => {
               <CharacterImage
                 imgSrc={imgSrc}
                 isSmallScreen={isSmallScreen}
-                isMediumScreen={isMediumScreen}
+                isMediumScreen={isMobileScreen}
               />
 
               <PersonalInfo
                 character={character}
-                isMediumScreen={isMediumScreen}
+                isMediumScreen={isMobileScreen}
                 isSmallScreen={isSmallScreen}
                 movies={movieTitles}
                 starships={starships}

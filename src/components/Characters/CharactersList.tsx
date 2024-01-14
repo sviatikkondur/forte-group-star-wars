@@ -5,20 +5,19 @@ import {
   Box,
   CircularProgress,
   Grid,
-  Typography,
-  useMediaQuery,
-  useTheme,
+  Typography
 } from '@mui/material';
 import { CharacterCard } from './components/CharacterCard';
 import { CharactersPagination } from '../Pagination/Pagination';
 import { useSearchParams } from 'react-router-dom';
 import { getVisibleCharacters } from '../../utils/getVisibleCharacters';
 import { ErrorModal } from '../ErrorModal/ErrorModal';
+import { useScreenSize } from '../../hooks/useScreenSize';
 
 export const CharactersList = () => {
   const [searchParams] = useSearchParams();
   const dispatch = useAppDispatch();
-  const theme = useTheme();
+  const { isMobileScreen } = useScreenSize();
 
   const { characters, error, loading, loaded } = useAppSelector(
     (state) => state.charactersSlice
@@ -43,8 +42,6 @@ export const CharactersList = () => {
   const minMass = searchParams.get('min');
   const maxMass = searchParams.get('max');
   const page = searchParams.get('page') || '1';
-
-  const isMobileScreen = useMediaQuery(theme.breakpoints.down('lg'));
 
   useEffect(() => {
     if (!loaded) {

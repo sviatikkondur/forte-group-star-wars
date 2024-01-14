@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 
 export const NotFoundPage: React.FC = () => {

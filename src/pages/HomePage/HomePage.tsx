@@ -1,12 +1,12 @@
-import { Container, Grid, useMediaQuery, useTheme } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import React from 'react';
 import { SearchInput } from '../../components/SearchInput/SearchInput';
 import { SideBar } from '../../components/SideBar/SideBar';
 import { CharactersList } from '../../components/Characters/CharactersList';
+import { useScreenSize } from '../../hooks/useScreenSize';
 
 export const HomePage = () => {
-  const theme = useTheme();
-  const isMobileScreen = useMediaQuery(theme.breakpoints.down('lg'));
+  const { isMobileScreen } = useScreenSize();
 
   return (
     <Container

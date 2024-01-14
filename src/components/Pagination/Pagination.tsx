@@ -1,9 +1,9 @@
-import { styled, useTheme } from '@mui/system';
+import { styled } from '@mui/system';
 import Pagination from '@mui/material/Pagination';
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getSearchWith } from '../../utils/searchHelper';
-import { useMediaQuery } from '@mui/material';
+import { useScreenSize } from '../../hooks/useScreenSize';
 
 type Props = {
   count: number;
@@ -34,17 +34,14 @@ const StyledPagination = styled(Pagination)(({ theme }) => ({
 
 export const CharactersPagination: React.FC<Props> = ({ count }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
-  const isMobileScreen = useMediaQuery(theme.breakpoints.down('lg'));
+  const { isSmallScreen, isMobileScreen } = useScreenSize();
 
   const pagesCount = Math.ceil(count / ITEMS_PER_PAGE);
 
   const handleChange = (event: React.ChangeEvent<unknown>, page: number) => {
-    const newParams = getSearchWith(
-      searchParams,
-      { page: page === PAGE_SIZE ? null : String(page) }
-    );
+    const newParams = getSearchWith(searchParams, {
+      page: page === PAGE_SIZE ? null : String(page),
+    });
     setSearchParams(newParams);
 
     window.scrollTo({

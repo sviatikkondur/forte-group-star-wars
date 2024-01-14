@@ -1,8 +1,9 @@
 import React from 'react';
 import { StarWarsCharacter } from '../../../types/TCharacter';
-import { Box, Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import swordAudio from '../../../static/audio/sword.wav';
+import { useScreenSize } from '../../../hooks/useScreenSize';
 
 type Props = {
   character: StarWarsCharacter;
@@ -21,10 +22,9 @@ const playAudio = () => {
 };
 
 export const CharacterCard: React.FC<Props> = ({ character }) => {
-  const theme = useTheme();
   const navigate = useNavigate();
 
-  const isMobileScreen = useMediaQuery(theme.breakpoints.down('lg'));
+  const { isMobileScreen } = useScreenSize();
 
   const id = extractIdFromUrl(character.url);
   const imgSrc = `https://storage.googleapis.com/starwars-images/people/${id}.jpg`;
@@ -86,8 +86,7 @@ export const CharacterCard: React.FC<Props> = ({ character }) => {
           Mass:{' '}
           {character.mass === 'unknown'
             ? character.mass
-            : `${character.mass} kg`
-          }
+            : `${character.mass} kg`}
         </Typography>
       </Box>
     </Grid>
