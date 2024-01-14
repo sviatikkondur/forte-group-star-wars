@@ -29,7 +29,8 @@ export const NotFoundPage: React.FC = () => {
               borderRadius={5}
               padding={2}
               sx={{
-                backgroundColor: '#000'
+                backgroundColor: '#000',
+                cursor: 'pointer',
               }}
             >
               <RocketLaunchIcon />
