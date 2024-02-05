@@ -1,4 +1,4 @@
-<h1 align="center">Forte Group Test Task - Star Wars Characters</h1>
+<h1 align="center">Star Wars Characters App</h1>
 
 # DEMO
 
@@ -9,7 +9,7 @@
 
 # Forte Group Star Wars Characters Website
 
-Welcome to the Forte Group Star Wars Characters Website, your ultimate destination for exploring the vast galaxy of Star Wars characters. Powered by the SWAPI API(slow API), this website provides detailed information about your favorite characters from the Star Wars universe. Let's take a closer look at the technologies and libraries used to bring this immersive experience to life. Character filtering and searching is implemented on FE, due to the lack of this functionality in the API. I also added a pagination, but still no pagination logic on backend, so I fetch all characters first. The first loading is slow due to this. The site looks good to me, it is responsive. Also, it has an interest sound when you click on the character card. TRY IT!
+Welcome to the Star Wars Characters Website, your ultimate destination for exploring the vast galaxy of Star Wars characters. Powered by the SWAPI API(slow API), this website provides detailed information about your favorite characters from the Star Wars universe. Let's take a closer look at the technologies and libraries used to bring this immersive experience to life. Character filtering and searching is implemented on FE, due to the lack of this functionality in the API. I also added a pagination, but still no pagination logic on backend, so I fetch all characters first. The first loading is slow due to this. The site looks good to me, it is responsive. Also, it has an interest sound when you click on the character card. TRY IT!
 
 ## Images
 
